@@ -5,22 +5,61 @@ import Array "mo:base/Array";
 import Blob "mo:base/Blob";
 import Text "mo:base/Text";
 import Cycles "mo:base/ExperimentalCycles";
+import Map "mo:map/Map";
+import { phash; nhash } "mo:map/Map";
 
 actor {
+    stable var autoIndex = 0;
+    let userIdMap = Map.new<Principal, Nat>();
+    let userProfileMap = Map.new<Nat, Text>();
+    let userResultsMap = Map.new<Nat, [Text]>();
+    
     public query ({ caller }) func getUserProfile() : async Result.Result<{ id : Nat; name : Text }, Text> {
         return #ok({ id = 123; name = "test" });
     };
 
     public shared ({ caller }) func setUserProfile(name : Text) : async Result.Result<{ id : Nat; name : Text }, Text> {
-        return #ok({ id = 123; name = "test" });
+        // Check if user already exists
+        switch (Map.get(userIdMap, phash, caller)) {
+            case (?_x) {};
+            case (_) {
+            // Set user id
+                Map.set(userIdMap, phash, caller, autoIndex);
+                autoIndex += 1;
+            };
+        };
+        
+        // Set profile name
+        let foundId = switch (Map.get(userIdMap, phash, caller)) {
+            case (?found) found;
+            case (_) { return #err("User not found") };
+        };
+
+        Map.set(userProfileMap, nhash, foundId, name);
+
+        return #ok({ id = foundId; name = name });
     };
 
     public shared ({ caller }) func addUserResult(result : Text) : async Result.Result<{ id : Nat; results : [Text] }, Text> {
-        return #ok({ id = 123; results = ["fake result"] });
+        // Check if user already exists
+        let userId = switch (Map.get(userIdMap, phash, caller)) {
+            case (?found) found;
+            case (_) { return #err("User not found") };
+        };
+
+        let inputResults = switch (Map.get(userResultsMap, nhash, userId)) {
+            case (?found) found;
+            case (_) { [] };
+        };
+
+        let updatedResults = Array.append(inputResults, [result]);
+        Map.set(userResultsMap, nhash, userId, updatedResults);
+
+        return #ok({ id = userId; results = updatedResults });
     };
 
     public query ({ caller }) func getUserResults() : async Result.Result<{ id : Nat; results : [Text] }, Text> {
-        return #ok({ id = 123; results = ["fake result"] });
+        return #ok({ id = 123; results = ["fake result111"] });
     };
 
     public func outcall_ai_model_for_sentiment_analysis(paragraph : Text) : async Result.Result<{ paragraph : Text; result : Text }, Text> {
