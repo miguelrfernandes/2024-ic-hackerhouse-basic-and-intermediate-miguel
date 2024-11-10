@@ -53,6 +53,11 @@ function App() {
         fontFamily: "Arial, sans-serif",
         padding: "20px",
         textAlign: "center",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        minHeight: "100vh",
+        backgroundColor: "#f0f2f5",
       }}
     >
       <img
@@ -68,16 +73,16 @@ function App() {
       )}
       {backendActor && (
         <>
-          <div style={{ margin: "20px 0" }}>
+          <div style={{ margin: "20px 0", width: "100%", maxWidth: "400px" }}>
             <h2 style={{ color: "#555" }}>Set your user profile 👤</h2>
             <form
               action="#"
               onSubmit={handleSubmitUserProfile}
-              style={{ display: "inline-block", textAlign: "left" }}
+              style={{ display: "flex", flexDirection: "column", textAlign: "left" }}
             >
               <label
                 htmlFor="name"
-                style={{ display: "block", marginBottom: "8px" }}
+                style={{ marginBottom: "8px" }}
               >
                 Enter your name:
               </label>
@@ -89,17 +94,18 @@ function App() {
                   padding: "8px",
                   width: "100%",
                   boxSizing: "border-box",
+                  marginBottom: "10px",
                 }}
               />
               <button
                 type="submit"
                 style={{
-                  marginTop: "10px",
                   padding: "10px 20px",
                   backgroundColor: "#007bff",
                   color: "#fff",
                   border: "none",
                   cursor: "pointer",
+                  alignSelf: "center",
                 }}
               >
                 Save 💾
@@ -123,16 +129,16 @@ function App() {
             )}
           </div>
 
-          <div style={{ margin: "20px 0" }}>
+          <div style={{ margin: "20px 0", width: "100%", maxWidth: "400px" }}>
             <h2 style={{ color: "#555" }}>Save a text message 📝</h2>
             <form
               action="#"
               onSubmit={handleSubmitUserResult}
-              style={{ display: "inline-block", textAlign: "left" }}
+              style={{ display: "flex", flexDirection: "column", textAlign: "left" }}
             >
               <label
                 htmlFor="text"
-                style={{ display: "block", marginBottom: "8px" }}
+                style={{ marginBottom: "8px" }}
               >
                 Enter your text:
               </label>
@@ -144,17 +150,18 @@ function App() {
                   padding: "8px",
                   width: "100%",
                   boxSizing: "border-box",
+                  marginBottom: "10px",
                 }}
               />
               <button
                 type="submit"
                 style={{
-                  marginTop: "10px",
                   padding: "10px 20px",
                   backgroundColor: "#007bff",
                   color: "#fff",
                   border: "none",
                   cursor: "pointer",
+                  alignSelf: "center",
                 }}
               >
                 Save 💾
@@ -162,7 +169,7 @@ function App() {
             </form>
           </div>
 
-          <div style={{ margin: "20px 0" }}>
+          <div style={{ margin: "20px 0", width: "100%", maxWidth: "400px" }}>
             <h2 style={{ color: "#555" }}>Saved Text Messages 💬</h2>
             {Array.isArray(userText) && userText.length > 0 ? (
               <ul style={{ listStyleType: "none", padding: "0" }}>

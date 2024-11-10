@@ -38,28 +38,30 @@ function NfidLogin(props) {
   }
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <section>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh", backgroundColor: "#f0f0f0" }}>
+      <section style={{ textAlign: "center", marginBottom: "20px" }}>
         <button
           id="loginBtn"
           onClick={handleLogin}
           style={{
-            padding: "10px 20px",
-            fontSize: "16px",
+            padding: "15px 30px",
+            fontSize: "18px",
             backgroundColor: "#4CAF50",
             color: "white",
             border: "none",
             borderRadius: "5px",
             cursor: "pointer",
+            boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+            transition: "background-color 0.3s ease",
           }}
+          onMouseOver={(e) => e.target.style.backgroundColor = "#45a049"}
+          onMouseOut={(e) => e.target.style.backgroundColor = "#4CAF50"}
         >
           🚀 Login with Gmail (powered by NFID)
         </button>
       </section>
-      <br />
-      <br />
-      <section id="loginStatus">
-        <p style={{ fontSize: "18px", fontWeight: "bold" }}>{myPrincipal}</p>
+      <section id="loginStatus" style={{ textAlign: "center" }}>
+        <p style={{ fontSize: "20px", fontWeight: "bold", color: "#333" }}>{myPrincipal}</p>
         {myPrincipal !== "Not Logged In" && (
           <p style={{ color: "red" }}>
             <em>⚠️ Note: never use this principal for production usage!</em>
