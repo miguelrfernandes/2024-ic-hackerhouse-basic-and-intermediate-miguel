@@ -19,3 +19,8 @@ npm start
 ```
 
 Which will start a server at `http://localhost:3000`, proxying API requests to the replica at port 4943.
+
+For more information about the project, you can visit the [project page](https://taikai.network/icp-portugal/hackathons/ICP-AI-HACKERHOUSE/projects/cm3bjkxkc07n467douxi63skp/idea).
+For a visual guide on how to run the project locally, you can watch the following video:
+
+[![Running the project locally](https://img.youtube.com/vi/Sdxa7D7uq18/0.jpg)](https://www.youtube.com/watch?v=Sdxa7D7uq18)
