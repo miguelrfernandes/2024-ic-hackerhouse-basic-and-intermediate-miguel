@@ -38,23 +38,35 @@ function NfidLogin(props) {
   }
 
   return (
-    <>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
       <section>
-        <button id="loginBtn" onClick={handleLogin}>
-          Login with Gmail (powered by NFID)
+        <button
+          id="loginBtn"
+          onClick={handleLogin}
+          style={{
+            padding: "10px 20px",
+            fontSize: "16px",
+            backgroundColor: "#4CAF50",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+        >
+          🚀 Login with Gmail (powered by NFID)
         </button>
       </section>
       <br />
       <br />
       <section id="loginStatus">
-        <p>{myPrincipal}</p>
-        {myPrincipal != "Not Logged In" && (
-          <p>
-            <em>Note: never use this principal for production usage!</em>
+        <p style={{ fontSize: "18px", fontWeight: "bold" }}>{myPrincipal}</p>
+        {myPrincipal !== "Not Logged In" && (
+          <p style={{ color: "red" }}>
+            <em>⚠️ Note: never use this principal for production usage!</em>
           </p>
         )}
       </section>
-    </>
+    </div>
   );
 }
 
